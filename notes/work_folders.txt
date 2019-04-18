@@ -1,0 +1,22 @@
+Основные рабочие каталоги для работы.
+
+Все аудиофайлы для проигрывания:
+/var/lib/asterisk/sounds/
+Речевые файлы Роботрон:
+/var/lib/asterisk/sounds/robotron/
+
+AGI скрипты:
+/var/lib/asterisk/agi-bin/
+
+Файлы диал-плана и коннектора:
+/etc/asterisk/
+    Файл диалплана: extensions.conf
+    Файлы коннектора: sip.conf
+
+Текущие файлы мониторинга записи:
+/var/spool/asterisk/monitor/
+
+Log файлы:
+/var/log/asterisk/
+
+Рабочие файлы Роботрон:
