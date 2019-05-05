@@ -95,7 +95,7 @@ def audio_formating(audio_data):
         line = line.split(':')
         key = line[0].strip()
         value = line[1].strip()
-        value = 'RT > ' + value
+        # value = 'RT > ' + value
         audio_block.update({key:value})
     return audio_block
 
