@@ -1,0 +1,9 @@
+Channel: SIP/79378531983@590889
+MaxRetries: 3
+RetryTime: 10
+Context: zadarma-in
+Extension: 590889
+Set: abntnum=79378531983
+Set: startblock=0000
+Set: scheme=test
+Priority: 1
