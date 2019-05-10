@@ -13,8 +13,8 @@ class FreeChannels(object):
         self.max_channels = max_channels
 
     def check(self):
-        system("sudo asterisk -vvvvvvrx 'core show channels' | grep call > "
-               "channels.list")
+        system("sudo asterisk -vvvvvvrx 'core show channels' |" \
+               " grep call > channels.list")
         with open('channels.list', 'r') as file:
             line = file.readline()
         words = line.split()
