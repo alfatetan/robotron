@@ -44,7 +44,7 @@ class IAMtoken(object):
         hour_token = int(time[0])
         if (now.year == year_token) and (now.month == month_token):
             if now.day < day_token:
-                return  iam_token
+                return iam_token
             elif (now.day == day_token) and (now.hour < hour_token):
                 return iam_token
         else:
