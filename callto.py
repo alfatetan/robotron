@@ -63,7 +63,7 @@ class CallFiles(object):
             'MaxRetries: 3',
             'RetryTime: 10',
             'Context: zadarma-in',
-            'Extension: zadarma-in',
+            'Extension: 590889',
             'Set: abntnum='+str(phone),
             'Set: startblock='+str(self.startblock),
             'Set: scheme='+str(self.scheme),
