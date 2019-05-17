@@ -78,6 +78,14 @@ class CallFiles(object):
     def create_call_files(self):
         for phone in self.phones:
             self.create_call_file(phone)
+        #Обнуляем список телефонов, так как для всех созданы файлы
+        self.phones = []
+            
+        return
+
+    def start_calls(self):
+        self.create_call_files()
+        os.system('mv *.call /var/spool/asterisk/outgoing')
         return
 
     
@@ -118,4 +126,5 @@ def start():
     return
 
 start()
-os.system('mv *.call /var/spool/asterisk/outgoing')
+#os.system('mv *.call /var/spool/asterisk/outgoing')
+dotcalls.start_calls()
