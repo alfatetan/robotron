@@ -81,15 +81,15 @@ def test_class():
     """
     protocol = AgiDebug('class_asterisk.log')
     asterisk = Asterisk()
-    protocol.append('Создали экземпляр класса Asterisk')
-    protocol.append('При инициализации он пропускает первые данные')
-    protocol.append('Запрашиваем переменную sayfile диалплана Asterisk')
+    protocol.upd('Создали экземпляр класса Asterisk')
+    protocol.upd('При инициализации он пропускает первые данные')
+    protocol.upd('Запрашиваем переменную sayfile диалплана Asterisk')
     variable = asterisk.get_variable('sayfile')
-    protocol.append(variable)
-    protocol.append('Самовольно заканчиваем разговор')
+    protocol.upd(variable)
+    protocol.upd('Самовольно заканчиваем разговор')
     asterisk.set_variable('sayfile', '_end')
-    protocol.append('Проверяем, установилась ли переменная:')
-    protocol.append(asterisk.get_variable('sayfile'))
+    protocol.upd('Проверяем, установилась ли переменная:')
+    protocol.upd(asterisk.get_variable('sayfile'))
     return
 
 test_class()
