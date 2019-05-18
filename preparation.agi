@@ -14,22 +14,22 @@ abntnum = asterisk.get_variable('abntnum')
 
 if start:
     asterisk.set_variable('sayindex', start)
-    log.append('Назначаем sayindex:')
-    log.append(start)
+    log.upd('Назначаем sayindex:')
+    log.upd(start)
 else:
     asterisk.set_variable('sayindex', '0000')
-    log.append('Назначаем sayindex по умолчанию 0000')
+    log.upd('Назначаем sayindex по умолчанию 0000')
 
 if scheme:
     asterisk.set_variable('scheme', scheme)
-    log.append('Устанавливаем схему разговора на:')
-    log.append(scheme)
+    log.upd('Устанавливаем схему разговора на:')
+    log.upd(scheme)
 else:
     asterisk.set_variable('scheme', 'default')
-    log.append('Устанавливаем схему разговора по умолчанию default')
+    log.upd('Устанавливаем схему разговора по умолчанию default')
 
 if abntnum:
     asterisk.set_variable('audiorec', abntnum)
-    log.append('Устанавливаем название аудиофайла как номер телефона')
-    log.append(abntnum)
+    log.upd('Устанавливаем название аудиофайла как номер телефона')
+    log.upd(abntnum)
 
