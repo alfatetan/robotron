@@ -8,4 +8,5 @@ iam.token
 *.call
 *.bak
 *~
+#*.*#
 #*#
