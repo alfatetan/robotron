@@ -23,7 +23,7 @@ class AgiDebug:
         self.file.close()
         return
 
-    def append(self, *args):
+    def upd(self, *args):
         """Записываем в протокол полученное значение"""
         for element in args:
             element += '\n'
@@ -32,5 +32,5 @@ class AgiDebug:
         
 if __name__ == '__main__':
     protocol = AgiDebug('protocol.txt')
-    protocol.append('Hi!')
-    protocol.append('How are you?')
+    protocol.upd('Hi!')
+    protocol.upd('How are you?')
