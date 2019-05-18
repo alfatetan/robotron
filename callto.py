@@ -36,7 +36,21 @@ class CallFiles(object):
         """
         Добавляем номер в список
         """
-        self.phones.append(phone)
+        #Подводим телефон к нужному стандарту и
+        #Убираем лишние символы, которые не являются цифрами
+        clean_phone = ''
+        for el in phone:
+            try:
+                value = int(el)
+                clean_phone += str(el)
+            except ValueError:
+                continue
+        #Если есть 8 спереди телефона - убираем
+        if clean_phone[0] == '8':
+            clean_phone = '7' + clean_phone[1:]
+        #Проверяем правильную длинну телефонного номера
+        if len(clean_phone) >= 11:
+            self.phones.append(phone)
         return
 
     def change_scheme(self, scheme):
@@ -53,7 +67,7 @@ class CallFiles(object):
         self.startblock = start
         return
 
-    def create_call_file(self, phone):
+    def create_call_faile(self, phone):
         """
         Создаём файл .call для активации звонка
         """
@@ -116,6 +130,7 @@ def start():
             help_me()
         else:
             try:
+                #Дополнительная проверка телефонного номера
                 phone = int(line.strip())
                 dotcalls.phone_append(str(phone))
             except ValueError:
