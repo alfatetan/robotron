@@ -10,6 +10,7 @@ log = AgiDebug('preparation_debug.log')
 #Если их нет, тогда ставим значение по умолчанию
 start = asterisk.get_variable('start_block')
 scheme = asterisk.get_variable('schemetalk')
+abntnum = asterisk.get_variable('abntnum')
 
 if start:
     asterisk.set_variable('sayindex', start)
@@ -26,4 +27,9 @@ if scheme:
 else:
     asterisk.set_variable('scheme', 'default')
     log.append('Устанавливаем схему разговора по умолчанию default')
+
+if abntnum:
+    asterisk.set_variable('audiorec', abntnum)
+    log.append('Устанавливаем название аудиофайла как номер телефона')
+    log.append(abntnum)
 
