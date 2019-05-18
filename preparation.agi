@@ -1,41 +1,29 @@
-#!/usr/bin/python3
-import sys
+#!/usr/local/bin/python3
 
-def first_data_ignore():
-    for _ in range(21):
-        line = sys.stdin.readline()
-    return
-
-def get_variable(variable):
-    send_string = 'get variable ' + variable + '\n'
-    sys.stdout.write(send_string)
-    sys.stdout.flush()
-    read_line = sys.stdin.readline()
-    read_line = read_line.strip()
-    return read_line[14:-1]
-
-def set_variable(name_variable, variable):
-    send_string = 'set variable '
-    send_string += str(name_variable)
-    send_string += ' '
-    send_string += str(variable)
-    send_string += '\n'
-    sys.stdout.write(send_string)
-    sys.stdout.flush()
-    read_line = sys.stdin.readline()
-    return read_line
-
-def transmit_variables():
-    #Переназначаем переменные, если они даны в файле .call
-    #Иначе используется значения по умолчанию
-    startblock = get_variable(startblock)
-    scheme = get_variable()
-    if startblock:
-        set_variable('sayindex', startblock)
-    if scheme:
-        set_variable('scheme', scheme)
-
+from asterisk import Asterisk
+from agidebug import AgiDebug
 
 #Basic code
-first_data_ignore()
-transmit_variables()
+asterisk = Asterisk()
+log = AgiDebug('preparation_debug.log')
+#Переназначаем переменные из .call файла
+#Если их нет, тогда ставим значение по умолчанию
+start = asterisk.get_variable('start_block')
+scheme = asterisk.get_variable('schemetalk')
+
+if start:
+    asterisk.set_variable('sayindex', start)
+    log.append('Назначаем sayindex:')
+    log.append(start)
+else:
+    asterisk.set_variable('sayindex', '0000')
+    log.append('Назначаем sayindex по умолчанию 0000')
+
+if scheme:
+    asterisk.set_variable('scheme', scheme)
+    log.append('Устанавливаем схему разговора на:')
+    log.append(scheme)
+else:
+    asterisk.set_variable('scheme', 'default')
+    log.append('Устанавливаем схему разговора по умолчанию default')
+
