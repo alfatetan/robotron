@@ -5,5 +5,5 @@ Context: zadarma-in
 Extension: 590889
 Set: abntnum=79378531983
 Set: startblock=0000
-Set: scheme=test
+Set: schemetalk=test
 Priority: 1
