@@ -80,7 +80,7 @@ class CallFiles(object):
             'Extension: 590889',
             'Set: abntnum='+str(phone),
             'Set: startblock='+str(self.startblock),
-            'Set: scheme='+str(self.scheme),
+            'Set: schemetalk='+str(self.scheme),
             'Priority: 1'
         ]
         with open(filename, 'w') as file:
