@@ -27,8 +27,7 @@ class SpeechKit(object):
         """
         Загружаем IAM токен для распознавания звукового файла, по умолчанию
         это файл iam.token
-        :param filename:
-        :return:
+        :return: False, если не будет iam.token
         """
         with open(filename, 'r') as file:
             full_token = json.load(file)
