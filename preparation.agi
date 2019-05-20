@@ -2,10 +2,12 @@
 
 from asterisk import Asterisk
 from agidebug import AgiDebug
+from talkrecord import TalkRecord as Talk
 
 #Basic code
 asterisk = Asterisk()
 log = AgiDebug('preparation_debug.log')
+
 #Переназначаем переменные из .call файла
 #Если их нет, тогда ставим значение по умолчанию
 start = asterisk.get_variable('start_block')
@@ -33,3 +35,6 @@ if abntnum:
     log.upd('Устанавливаем название аудиофайла как номер телефона')
     log.upd(abntnum)
 
+#Создаём файл отчёта по разговору
+talkfile = Talk(abntnum)
+talkfile.create_talk_file()
