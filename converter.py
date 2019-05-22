@@ -222,6 +222,31 @@ class Converter(object):
     
         return 
 
+def check_start_args():
+    '''
+    Проверяем есть ли аргументы. Если нет, то запрашиваем имя файла
+    '''
+    if len(sys.argv) == 1:
+        # arg = input('Введите название файла(ов) и/или параметры : ')
+        # args.append(arg)
+        print('Введите параметры при запуске конвертера.')
+        return False
+    else:
+        args = sys.argv[1:]
+    #Проверка аргументов
+    keys = []
+    filenames = []
+    for el in args:
+        if el.count('--'):
+            keys.append(el)
+        else:
+            filenames.append(el)
+    args = {
+        'filenames':filenames,
+        'keys':keys,
+    }
+    return args
+    
 def converter():
     '''
     Запускаем конвертер
