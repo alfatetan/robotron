@@ -222,6 +222,7 @@ class Converter(object):
     
         return 
 
+#Блок для работы класса как утилиты
 def check_start_args():
     '''
     Проверяем есть ли аргументы. Если нет, то запрашиваем имя файла
@@ -246,6 +247,26 @@ def check_start_args():
         'keys':keys,
     }
     return args
+
+def help_converter():
+    print('\n\nКонвертер для переработки пользовательского файла в ' \
+          'необходимый формат для описания блока речи.\n' \
+          'Необходимо указать имена пользовательского(их) файла(ов),'\
+          ' которые будут содержать в себе описание блока текста, ' \
+          'текста, согласно "Инструкции по составлению блоков речи"' \
+          '\n\tФормат команды:\n' \
+          'python3 converter [keys] [file_name [file_names]]\n\n')
+    return True
+
+def keys_calls(keys_list):
+    '''
+    Обрабатываем параметры ключей
+    '''
+    #Пока работаем с одним ключом: --help
+    if keys_list.count('--help'):
+        help_converter()
+        return False
+    return True
     
 def converter():
     '''
