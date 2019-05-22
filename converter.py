@@ -88,7 +88,7 @@ def audio_formating(audio_data):
     '''
     Обработка и форматирование аудиоблока в пользовательском файле
     '''
-    audio_block = {}
+    audio_block = []
     audio_data = audio_data.split('\n')
     audio_data = delete_empty(audio_data)
     for line in audio_data:
@@ -96,7 +96,7 @@ def audio_formating(audio_data):
         key = line[0].strip()
         value = line[1].strip()
         # value = 'RT > ' + value
-        audio_block.update({key:value})
+        audio_block.append({key:value})
     return audio_block
 
 def weighting(phrase):
