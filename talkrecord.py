@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-import 
-
 class TalkRecord(object):
     """
     Класс, работающий с протоколом разговора и записывающим
