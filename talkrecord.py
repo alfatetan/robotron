@@ -19,7 +19,9 @@ class TalkRecord(object):
         try:
             self.talkfile = open(self.filename, 'r+')
             #Заносим всю историю нашего диалога
-            self.get_history()
+            self.history = self.get_history()
+            #В списке history храниться история блоков
+            #В history[0] - номер телефона абонента
         except FileNotFoundError:
             self.talkfile = open(self.filename, 'w')
             self.create_talk_file()
@@ -49,6 +51,7 @@ class TalkRecord(object):
         
         return
 
+    @staticmethod
     def create_talk_file(self):
         """
         Вызывается скриптом, который запускается в начале разговора
@@ -89,3 +92,5 @@ if __name__ == "__main__":
     tr.save_talk("I glad to see you too")
     print('Симуляция завершена. Файл создан. Можно посмотреть' \
           'результат')
+    print('История блоков:')
+    print(tr.history)
