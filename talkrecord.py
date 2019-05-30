@@ -14,10 +14,15 @@ class TalkRecord(object):
         self.phone_number = phone_number
         self.filename = phone_number + '.talk'
         self.blocks = []
+        self.history = []
         #Открываем файл на всю историю работы экземпляра класса
-        self.talkfile = open(self.filename, 'r+')
-        #Заносим всю историю нашего диалога
-        self.history = self.get_history()
+        try:
+            self.talkfile = open(self.filename, 'r+')
+            #Заносим всю историю нашего диалога
+            self.get_history()
+        except FileNotFoundError:
+            self.talkfile = open(self.filename, 'w')
+            self.create_talk_file()
         
         return
 
@@ -26,18 +31,18 @@ class TalkRecord(object):
         Деструктор класса
         """
         #Записываем и закрываем файл
-        self.file.close()
+        self.talkfile.close()
 
         return
 
-    def save_talk(string, blockname='_АБ_'):
+    def save_talk(self, string, blockname='_АБ_'):
         """
         Записвыает разговор с абонентом в виде текстового протокола.
 
         param: string - строка текста, blockname - название блока
         return:
         """
-        self.talkfile.write(blockname + ' > ' + string)
+        self.talkfile.write(blockname + ' > ' + string + '\n')
         #Игнорируем обозначение блока разговора абонента
         if (blockname != '_АБ_'):
             self.history.append(blockname)
@@ -55,7 +60,7 @@ class TalkRecord(object):
     
     def get_history(self):
         """
-        Читаем протокол и забираем у него необходимые данные
+        Читаем протокол и забираем у него историю пройденных блоков
         param:
         return:
         """
@@ -70,3 +75,17 @@ class TalkRecord(object):
 
         return blocks
 
+
+#Тест класса
+if __name__ == "__main__":
+    tr = TalkRecord('79123456789')
+    print('Создаём файл протокола разговора', tr.filename)
+    print('Симулирование разговора.')
+    tr.save_talk('Hi!', '0000')
+    tr.save_talk('hi')
+    tr.save_talk('How are you?', '0001')
+    tr.save_talk("I'm fine and you?")
+    tr.save_talk("Good. I glad to see you!", '0003')
+    tr.save_talk("I glad to see you too")
+    print('Симуляция завершена. Файл создан. Можно посмотреть' \
+          'результат')
