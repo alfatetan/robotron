@@ -20,7 +20,7 @@ class FreeChannels(object):
         words = line.split()
         active_channels = int(words[0])
         free_channels = self.max_channels - active_channels
-        print(free_channels)
+        #print(free_channels)
         return free_channels
 
 
