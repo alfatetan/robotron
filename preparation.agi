@@ -37,4 +37,4 @@ if abntnum:
 
 #Создаём файл отчёта по разговору
 talkfile = Talk(abntnum)
-talkfile.create_talk_file()
+#talkfile.create_talk_file()
