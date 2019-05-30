@@ -10,19 +10,14 @@ class SpeechBlock(object):
     """
     Класс, отвечающий за работу блока речи
     """
-    def __init__(self, block, scheme='my', skip=False,\
-                 path=False):
+    def __init__(self, block, scheme='my',\
+                 path='/var/lib/asterisk/sounds'):
         """
         Инициируем класс, где загружаем все необходимые данные
         """
         #pdb.set_trace()
         self.next_audiofile = ''
         self.next_audiotext = ''
-        #Если путь не задан - выставляем стандартный
-        if not path:
-            #После можно сюда занести возможность подкачивать путь
-            #из файла настроек
-            path = '/var/lib/asterisk/sounds/'
         #Если нет расширения в названии блока, то добавим его сами
         if not block.count('.trgs'):
             #Если блок не содержит расширения, то добавим его
