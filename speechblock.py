@@ -134,17 +134,17 @@ class SpeechBlock(object):
         param:
         return: dict(audiofile: audiotext)
         """
-        #pdb.set_trace()
         #Проверяем сколько раз этот блок уже был и проигрываем
         #звуковой файл по очереди, повторяя по кольцу
-        if value < len(self.audio_block):
-            value = value % len(self.audio_block) % value
+        if value >= len(self.audio_block):
+            value = value % len(self.audio_block)
+        print('value = ', value)
         audio = self.audio_block[value]
 
         #Добавляем значение свойства в класс
         for key, text in audio.items():
             self.next_audiofile = key
-            Self.next_audiotext = text
+            self.next_audiotext = text
             
         return audio
 
@@ -156,7 +156,7 @@ if __name__ == '__main__':
                     path='/Users/RyabovSergey/Projects/robotron/')
     speech_text = input('Enter the text:')
     s.analysis(speech_text)
-    print ('Audiofile = ', s.get_audio(2))
+    print ('Audiofile = ', s.get_audio(1))
     print ('check_skip = ', s.check_skip())
     print ('next_block = ', s.next_block)
     print ('next_audiofile = ', s.next_audiofile)
