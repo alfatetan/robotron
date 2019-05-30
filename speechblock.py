@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 import json
-from agidebug import AgiDebug
+#from agidebug import AgiDebug
 #from talkrecord import TalkRecord
 
-import pdb
+#import pdb
 
 class SpeechBlock(object):
     """
@@ -98,7 +98,7 @@ class SpeechBlock(object):
         best_block = default_block if not wt_max else best_block
 
         #Вычисление обратных переходов
-        if best_block.count('back'):
+        if best_block.count('back(') or best_clock.count('back ('):
             #Берём значение в скобках
             block = best_block.split('(')
             block = block[1].split(')')
