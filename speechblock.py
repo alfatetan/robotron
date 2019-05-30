@@ -156,7 +156,7 @@ if __name__ == '__main__':
                     path='/Users/RyabovSergey/Projects/robotron/')
     speech_text = input('Enter the text:')
     s.analysis(speech_text)
-    print ('Audiofile = ', s.get_audio(1))
+    print ('Audiofile = ', s.get_audio(7))
     print ('check_skip = ', s.check_skip())
     print ('next_block = ', s.next_block)
     print ('next_audiofile = ', s.next_audiofile)
