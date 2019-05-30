@@ -18,6 +18,7 @@ class Asterisk(object):
         self.skip = self.get_variable('skip')
         self.voicefile = self.get_variable('voicefile')
         self.waitvoice = self.get_variable('waitvoice')
+        self.abntnum = self.get_variable('abntnum')
         self.sayfile = ''
         
         return
