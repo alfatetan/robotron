@@ -31,8 +31,8 @@ class Asterisk(object):
         self.set_variable('scheme', self.scheme)
         self.set_variable('sayindex', self.speech_block)
         self.set_variable('skip', self.skip)
-        self.set_variable('waitvoice', waitvoice)
-        self.set_variable('sayfile', sayfile)
+        self.set_variable('waitvoice', self.waitvoice)
+        self.set_variable('sayfile', self.sayfile)
 
         return
     
