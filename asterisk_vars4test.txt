@@ -1,0 +1,1 @@
+{"scheme": "test_dialog", "sayindex": "01", "skip": false, "voicefile": "01_1.wav", "waitvoice": "0", "abntnum": "79123456789", "sayfile": ""}
