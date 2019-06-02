@@ -1,6 +1,6 @@
 /venv/
 /.idea/
-/__pycashe__/
+/__pycache__/
 /trash/
 /old/
 /sounds/
