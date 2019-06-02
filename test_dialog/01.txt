@@ -1,0 +1,7 @@
+1_1.wav: Block 1. Voice 1
+1_2.wav: Block 1. Voice 2
+1_3.wav: Block 1. Voice 3
+$
+02: 2 two два второй
+04: 4 four четыре четвёртый четвертый
+06: 6 six шесть шестой
