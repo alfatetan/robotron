@@ -1,0 +1,8 @@
+file1.wav: This is a first audiotext
+file2.wav: This is a second audiotext
+file3.wav: This is a third audiotext
+$
+Block1:How are you
+Block2:Hello "my friend"(10)
+Block3: Hello
+Block2: Hi "my friend"(10)
