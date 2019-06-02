@@ -1,0 +1,1 @@
+[{"file1.wav": "RT > This is a first audiotext", "file2.wav": "RT > This is a second audiotext", "file3.wav": "RT > This is a third audiotext"}, {"Block1": [["how", 1], ["are", 1], ["you", 1]], "Block3": [["hello", 1]], "Block2": [["hello", 1], ["my friend", 10], ["hi", 1]]}]
