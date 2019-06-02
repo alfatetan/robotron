@@ -3,6 +3,7 @@
 from asterisk import Asterisk
 from agidebug import AgiDebug
 from talkrecord import TalkRecord as Talk
+from speechblock import SpeechBlock
 
 #Basic code
 asterisk = Asterisk()
@@ -37,4 +38,13 @@ if abntnum:
 
 #Создаём файл отчёта по разговору
 talkfile = Talk(abntnum)
-#talkfile.create_talk_file()
+
+#Добавляем первую запись в лог-файл разговора
+sb = SpeechBlock(block=sayindex, scheme=scheme)
+#Берём первый элемент (не совсем стандартным способом)
+#то что подвернулось под руку. И назначаем его первым приветственным
+#файлом и текстом
+for key, value in sb.audio_block.items():
+    talkfile.save_talk(string=value, blockname=key)
+    asterisk.set_variable('sayfile', key)
+    break
