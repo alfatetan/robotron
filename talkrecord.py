@@ -51,7 +51,6 @@ class TalkRecord(object):
         
         return
 
-    @staticmethod
     def create_talk_file(self):
         """
         Вызывается скриптом, который запускается в начале разговора
