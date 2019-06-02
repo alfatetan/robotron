@@ -4,8 +4,6 @@ import json
 #from agidebug import AgiDebug
 #from talkrecord import TalkRecord
 
-#import pdb
-
 class SpeechBlock(object):
     """
     Класс, отвечающий за работу блока речи
@@ -15,7 +13,6 @@ class SpeechBlock(object):
         """
         Инициируем класс, где загружаем все необходимые данные
         """
-        #pdb.set_trace()
         self.next_audiofile = ''
         self.next_audiotext = ''
         #Если нет расширения в названии блока, то добавим его сами
@@ -25,11 +22,13 @@ class SpeechBlock(object):
         else:
             self.trgs_filename = block
         #Путь к схеме разговора
+        path = path + '/' if path[-1] != '/' else path
+        scheme = scheme + '/' if scheme[-1] != '/' else scheme
         self.scheme_folder = path + scheme
         #Имя файла блока с полным путём разговра
         self.trgs_filename = self.scheme_folder + self.trgs_filename
-        
-        #Считываем файл .trgs            
+
+        #Считываем файл .trgs
         try:
             with open(self.trgs_filename, 'r') as file:
                 filedata = json.load(file)
@@ -80,11 +79,12 @@ class SpeechBlock(object):
                 default_block = block if (phrase[0] == '_') else \
                     default_block
 
-                #Ну и наличие безусловного перехода в другой блок
-                #Может быть и пропустим, так как должны про него
-                #знать заранее
-                #if phrase[0] == '*':
-                #    pass
+                #Ну и наличие безусловного перехода
+                #Если оно есть, то прерываем проверку и выходим
+                #с уже готовым решением
+                if phrase[0] == '*':
+                    self.next_block = block
+                    return block
 
             #Вычисляем лучший блок
             if wt > wt_max:
@@ -98,7 +98,7 @@ class SpeechBlock(object):
         best_block = default_block if not wt_max else best_block
 
         #Вычисление обратных переходов
-        if best_block.count('back(') or best_clock.count('back ('):
+        if best_block.count('back(') or best_block.count('back ('):
             #Берём значение в скобках
             block = best_block.split('(')
             block = block[1].split(')')
