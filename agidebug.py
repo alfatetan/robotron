@@ -11,7 +11,10 @@ class AgiDebug:
         #Параметр 1 и более - количество буферизуемых строк
         #Отрицательное значение - используем по величине системного
         #буфера (см параметр open)
-        self.file = open(filename, 'a+')
+        try:
+            self.file = open(filename, 'a')
+        except FileNotFoundError:
+            self.file = open(filename, 'w')
         #Так как нам не нужна буферизация протокола, то нечего
         #тратить на это память
         return
