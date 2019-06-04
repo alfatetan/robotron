@@ -11,10 +11,10 @@ class AgiDebug:
         #Параметр 1 и более - количество буферизуемых строк
         #Отрицательное значение - используем по величине системного
         #буфера (см параметр open)
-        try:
-            self.file = open(filename, 'a')
-        except FileNotFoundError:
-            self.file = open(filename, 'w')
+        #try:
+        #    self.file = open(filename, 'a')
+        #except FileNotFoundError:
+        #    self.file = open(filename, 'w')
         #Так как нам не нужна буферизация протокола, то нечего
         #тратить на это память
         return
@@ -28,9 +28,10 @@ class AgiDebug:
 
     def upd(self, *args):
         """Записываем в протокол полученное значение"""
-        for element in args:
-            element += '\n'
-            self.file.write(element)
+        with open(self.filename, 'a+') as file:
+            for element in args:
+                element += '\n'
+                file.write(element)
         return
         
 if __name__ == '__main__':
