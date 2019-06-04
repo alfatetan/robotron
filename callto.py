@@ -67,7 +67,7 @@ class CallFiles(object):
         self.startblock = start
         return
 
-    def create_call_faile(self, phone):
+    def create_call_file(self, phone):
         """
         Создаём файл .call для активации звонка
         """
@@ -138,8 +138,8 @@ def start():
                 break
 
     dotcalls.create_call_files()
+    dotcalls.start_calls()
     return
 
-start()
-#os.system('mv *.call /var/spool/asterisk/outgoing')
-dotcalls.start_calls()
+if __name__ == "__main__":
+    start()
