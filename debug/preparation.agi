@@ -1,11 +1,17 @@
 #!/usr/bin/python3
 
 from agidebug import AgiDebug
+from asterisk import Asterisk
 import sys
 
 log = AgiDebug('/var/lib/asterisk/agi-bin/protocol_preparation.txt')
-log.upd('Попробуем записать через класс с использованием ' \
-        'импорта.')
-for _ in range(21):
-    line = sys.stdin.readline()
-    log.upd(line)
+log.upd('Проверка класса Asterisk')
+
+ast = Asteisk()
+log.upd('scheme = ', ast.scheme)
+log.upd('speech_block = ', ast.speech_block)
+log.upd('voicefile = ', ast.voicefile)
+log.upd('waitvoice = ', ast.waitvoice)
+log.upd('abntnum =', ast.abntnum)
+callerid = ast.get_variable('agi_callerid')
+log.upd('agi_callerid = ', callerid)
