@@ -87,6 +87,7 @@ log = AgiDebug('/var/lib/asterisk/agi-bin/protocol_preparation.txt')
 log.upd('Проверка класса Asterisk')
 
 ast = Asteisk()
+log.upd('Создан класс Asterisk как ast')
 log.upd('scheme = ', ast.scheme)
 log.upd('speech_block = ', ast.speech_block)
 log.upd('voicefile = ', ast.voicefile)
