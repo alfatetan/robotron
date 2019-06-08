@@ -4,33 +4,33 @@ from agidebug import AgiDebug
 #from asterisk import Asterisk
 import sys
 
-class Asterisk(object):
+class Asterisk(AgiDebug):
     """
     Класс для работы с Asterisk. Инкапсулирует в себе функции
     работы и все необходимые переменные
     """
     def __init__(self):
         #Пропускаем первые данные, которые нам не нужны
-        self.log = AgiDebug('/var/lib/asterisk/agi-bin/asterisk_log.txt')
-        self.log.upd('Пропускаем первые данные')
+        super().__init__('/var/lib/asterisk/agi-bin/asterisk_log.txt')
+        self.upd('Пропускаем первые данные')
         self.first_data_ignore()
         
 
         #Подгружаем переменные с Asterisk
         self.scheme = self.get_variable('scheme')
-        self.log.upd('scheme = ', self.scheme)
+        self.upd('scheme = ', self.scheme)
         self.speech_block = self.get_variable('sayindex')
-        self.log.upd('speech_block (sayindex) = ', self.speech_block)
+        self.upd('speech_block (sayindex) = ', self.speech_block)
         self.skip = self.get_variable('skip')
-        self.log.upd('skip = ', self.skip)
+        self.upd('skip = ', self.skip)
         self.voicefile = self.get_variable('voicefile')
-        self.log.upd('voicefile = ', self.voicefile)
+        self.upd('voicefile = ', self.voicefile)
         self.waitvoice = self.get_variable('waitvoice')
-        self.log.upd('waitvoice = ', self.waitvoice)
+        self.upd('waitvoice = ', self.waitvoice)
         self.abntnum = self.get_variable('abntnum')
-        self.log.upd('abntnum = ', self.abntnum)
+        self.upd('abntnum = ', self.abntnum)
         self.sayfile = ''
-        self.log.upd('sayfile = ', self.sayfile)
+        self.upd('sayfile = ', self.sayfile)
         
         return
 
