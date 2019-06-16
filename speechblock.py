@@ -133,7 +133,7 @@ class SpeechBlock(object):
         #звуковой файл по очереди, повторяя по кольцу
         if value >= len(self.audio_block):
             value = value % len(self.audio_block)
-        print('value = ', value)
+
         audio = self.audio_block[value]
 
         #Добавляем значение свойства в класс
