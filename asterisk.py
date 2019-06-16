@@ -10,26 +10,32 @@ class Asterisk(object):
     """
     def __init__(self):
         #Пропускаем первые данные, которые нам не нужны
-        self.first_data_ignore()
+        self.callerid = self.first_data_ignore()
+        if self.callerid.count('unknown'):
+            self.abntnum = self.get_variable('abntnum')
+            self.typering = 'out'
+        else:
+            self.abntnum = self.callerid
+            self.typering = 'in'
 
-        #Подгружаем переменные с Asterisk
         self.scheme = self.get_variable('scheme')
         self.speech_block = self.get_variable('sayindex')
         self.skip = self.get_variable('skip')
         self.voicefile = self.get_variable('voicefile')
         self.waitvoice = self.get_variable('waitvoice')
-        self.abntnum = self.get_variable('abntnum')
         self.sayfile = ''
-        
+
         return
 
     def __del__(self):
         """
-        Диструктор объекта. В завершении мы выгружаем все имеющиеся
+        Деструктор объекта. В завершении мы выгружаем все имеющиеся
         данные в Asterisk
         """
-        self.set_variable('scheme', self.scheme)
-        self.set_variable('sayindex', self.speech_block)
+        if self.scheme:
+            self.set_variable('scheme', self.scheme)
+        if self.speech_block:
+            self.set_variable('sayindex', self.speech_block)
         self.set_variable('skip', self.skip)
         self.set_variable('waitvoice', self.waitvoice)
         self.set_variable('sayfile', self.sayfile)
@@ -39,11 +45,17 @@ class Asterisk(object):
     def first_data_ignore(self):
         """
         Пропускаем все начальные данные пришедшие от Asterisk
+        и возвращаем callerid абонента. Если звонок исходящий
+        то это значение будет unknown, если входящий, то в нём
+        будет номер телефонаnn
         """
         for _ in range(21):
             line = sys.stdin.readline()
+            if line.count('agi_callerid'):
+                line = line.split(':')
+                callerid = line[1].strip()
             
-        return
+        return callerid.lower()
 
     def get_variable(self, variable):
         """
@@ -54,7 +66,11 @@ class Asterisk(object):
         sys.stdout.flush()
         read_line = sys.stdin.readline()
         read_line = read_line.strip()
-        
+        if read_line.count('result=1'):
+            read_line = read_line[14:-1]
+        else:
+            read_line = False
+            
         return read_line[14:-1]
 
     def set_variable(self, name_variable, variable):
@@ -71,6 +87,16 @@ class Asterisk(object):
         read_line = sys.stdin.readline()
         
         return read_line
+
+    def hungup(self):
+        """
+        Вешаем трубку
+        """
+        sys.stdout.write('hungup')
+        sys.stdout.flush()
+        read_line = sys.stdin.readline()
+
+        return read_line
     
 #Проверка класса через AGI скрипт. Для этого необходимо этот файл
 #назвать say_agi.agi и закинуть в папочку:
@@ -80,7 +106,7 @@ def test_class():
     """
     Проверка работоспособности класса
     """
-    protocol = AgiDebug('class_asterisk.log')
+    protocol = AgiDebug('/var/lib/asterisk/agi-bin/class_asterisk.log')
     asterisk = Asterisk()
     protocol.upd('Создали экземпляр класса Asterisk')
     protocol.upd('При инициализации он пропускает первые данные')
