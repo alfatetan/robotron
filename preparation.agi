@@ -2,7 +2,7 @@
 
 from asterisk import Asterisk
 from agidebug import AgiDebug
-from talkrecord import TalkRecord as Talk
+from talkrecord import TalkRecord
 from speechblock import SpeechBlock
 
 #Basic code
@@ -11,40 +11,43 @@ log = AgiDebug('preparation_debug.log')
 
 #Переназначаем переменные из .call файла
 #Если их нет, тогда ставим значение по умолчанию
-start = asterisk.get_variable('start_block')
+start = asterisk.get_variable('startblock')
 scheme = asterisk.get_variable('schemetalk')
-abntnum = asterisk.get_variable('abntnum')
+#abntnum = asterisk.get_variable('abntnum')
 
-if start:
-    asterisk.set_variable('sayindex', start)
-    log.upd('Назначаем sayindex:')
-    log.upd(start)
-else:
-    asterisk.set_variable('sayindex', '0000')
-    log.upd('Назначаем sayindex по умолчанию 0000')
+#Создаём лог файл разговора при любом раскладе
+talk = TalkRecord(asterisk.abntnum, asterisk.typering)
+log.upd("Создан файл .talk с именем: ", asterisk.abntnum)
 
-if scheme:
-    asterisk.set_variable('scheme', scheme)
-    log.upd('Устанавливаем схему разговора на:')
-    log.upd(scheme)
-else:
-    asterisk.set_variable('scheme', 'default')
-    log.upd('Устанавливаем схему разговора по умолчанию default')
+log.upd('Тип звонка: ', asterisk.typering)
 
-if abntnum:
-    asterisk.set_variable('audiorec', abntnum)
-    log.upd('Устанавливаем название аудиофайла как номер телефона')
-    log.upd(abntnum)
+if asterisk.typering == 'out':
+    #Подгружаем схему разговора
+    scheme = asterisk.get_variable('schemetalk')
+    log.upd('schemetalk = ', scheme)
+    
+    #Устанавливаем схему разговора сразу в Астериск
+    asterisk.scheme = scheme
+    log.upd('Параметр scheme в Asterisk устновлен')
+    
+    #Узнаём какой первый блок схемы разговора
+    startblock = asterisk.get_variable('startblock')
+    log.upd('Первый блок схемы разговора: ', startblock)
 
-#Создаём файл отчёта по разговору
-talkfile = Talk(abntnum)
+    #Устанавливаем первый блок разговора в Asterisk
+    asterisk.speech_block = startblock
+    
+    #Подгружаем этот блок разговора
+    sb = SpeechBlock(startblock)
+    log.upd('Блок речи подгружен')
+    
+    sb.get_audio()
+    asterisk.sayfile = sb.next_audiofile
+    log.upd('sayfile будет: ', asterisk.sayfile)
+    
+if asterisk.typering == 'in':
+    #Тут будет обработчик, который будет подгружать разные схемы
+    #в зависимости от номера телефона, согласно таблицы
+    #Пока просто заглушка
+    pass
 
-#Добавляем первую запись в лог-файл разговора
-sb = SpeechBlock(block=sayindex, scheme=scheme)
-#Берём первый элемент (не совсем стандартным способом)
-#то что подвернулось под руку. И назначаем его первым приветственным
-#файлом и текстом
-for key, value in sb.audio_block.items():
-    talkfile.save_talk(string=value, blockname=key)
-    asterisk.set_variable('sayfile', key)
-    break
