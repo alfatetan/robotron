@@ -119,4 +119,5 @@ def test_class():
     protocol.upd(asterisk.get_variable('sayfile'))
     return
 
-test_class()
+if __name__ == "__main__":
+    test_class()
