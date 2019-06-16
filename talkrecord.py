@@ -58,7 +58,7 @@ class TalkRecord(object):
         Вставляет номер телефона абонента в .talk файл
         """
         self.talkfile.write(self.phone_number + '\n')
-        self.talkfile.write('Type: ', self.typering)
+        self.talkfile.write('Type: ' + self.typering + '\n')
         
         return
     
