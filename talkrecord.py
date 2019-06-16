@@ -5,7 +5,7 @@ class TalkRecord(object):
     Класс, работающий с протоколом разговора и записывающим
     результаты в текстовом виде
     """
-    def __init__(self, phone_number):
+    def __init__(self, phone_number, typering='unknown'):
         """
         Инициализация класса. Читаем файл протокола и анализируем
         param:
@@ -15,6 +15,7 @@ class TalkRecord(object):
         self.filename = phone_number + '.talk'
         self.blocks = []
         self.history = []
+        self.typering = typering
         #Открываем файл на всю историю работы экземпляра класса
         try:
             self.talkfile = open(self.filename, 'r+')
@@ -57,6 +58,7 @@ class TalkRecord(object):
         Вставляет номер телефона абонента в .talk файл
         """
         self.talkfile.write(self.phone_number + '\n')
+        self.talkfile.write('Type: ', self.typering)
         
         return
     
