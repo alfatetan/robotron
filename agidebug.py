@@ -30,8 +30,8 @@ class AgiDebug:
         """Записываем в протокол полученное значение"""
         #with open(self.filename, 'a+') as file:
         for element in args:
-            element += '\n'
             file.write(element)
+        file.write('\n')
         return
         
 if __name__ == '__main__':
