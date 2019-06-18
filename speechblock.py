@@ -138,11 +138,7 @@ class SpeechBlock(object):
 
         #Добавляем значение свойства в класс
         for key, text in audio.items():
-            if self.next_audiofile.count('.wav'):
-                key = key.split('.')
-                self.next_audiofile = key[0]
-            else:
-                self.next_audiofile = key
+            self.next_audiofile = key
             self.next_audiotext = text
             
         return audio
