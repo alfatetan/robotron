@@ -39,7 +39,7 @@ class Asterisk(object):
             self.set_variable('scheme', self.scheme)
         if self.speech_block:
             self.set_variable('sayindex', self.speech_block)
-        self.set_variable('skip', int(self.skip))
+        self.set_variable('skip', str(int(self.skip)))
         self.set_variable('waitvoice', self.waitvoice)
         self.set_variable('sayfile', self.sayfile)
 
@@ -74,7 +74,7 @@ class Asterisk(object):
         else:
             read_line = False
             
-        return read_line[14:-1]
+        return read_line
 
     def set_variable(self, name_variable, variable):
         """
