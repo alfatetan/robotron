@@ -41,6 +41,9 @@ class Asterisk(object):
             self.set_variable('sayindex', self.speech_block)
         self.set_variable('skip', str(int(self.skip)))
         self.set_variable('waitvoice', self.waitvoice)
+        if self.sayfile.count('.wav'):
+            self.sayfile = self.sayfile.split('.')
+            self.sayfile = self.sayfile[0]
         self.set_variable('sayfile', self.sayfile)
 
         return
