@@ -5,14 +5,15 @@ class TalkRecord(object):
     Класс, работающий с протоколом разговора и записывающим
     результаты в текстовом виде
     """
-    def __init__(self, phone_number, typering='unknown'):
+    def __init__(self, phone_number, typering='unknown', \
+                 path='/var/lib/asterisk/agi-bin/'):
         """
         Инициализация класса. Читаем файл протокола и анализируем
         param:
         return:
         """
         self.phone_number = phone_number
-        self.filename = phone_number + '.talk'
+        self.filename = path + phone_number + '.talk'
         self.blocks = []
         self.history = []
         self.typering = typering
