@@ -45,7 +45,8 @@ class Asterisk(object):
             self.sayfile = self.sayfile.split('.')
             self.sayfile = self.sayfile[0]
         self.set_variable('sayfile', self.sayfile)
-        self.set_variable('audiorec', self.abntnum)
+        audiorec = self.abntnum + '-' + self.typering
+        self.set_variable('audiorec', audiorec)
 
         return
     
