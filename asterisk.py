@@ -26,7 +26,7 @@ class Asterisk(object):
         
         self.voicefile = self.get_variable('voicefile')
         self.waitvoice = self.get_variable('waitvoice')
-        self.sayfile = ''
+        self.sayfile = self.get_variable('sayfile')
 
         return
 
