@@ -14,7 +14,7 @@ from agidebug import AgiDebug
 #Основной текст AGI
 #Связываемся с Asterisk и получаем необходимые переменные
 asterisk = Asterisk()
-log = TalkRecord('/var/lib/asterisk/agi-bin/'+asterisk.abntnum)
+log = TalkRecord(asterisk.abntnum)
 
 #Читаем .trgs файл
 sp_bl = SpeechBlock(block=asterisk.speech_block,\
