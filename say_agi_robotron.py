@@ -14,12 +14,12 @@ from agidebug import AgiDebug
 #Основной текст AGI
 #Связываемся с Asterisk и получаем необходимые переменные
 asterisk = Asterisk()
-log = TalkRecord(asterisk.abntnum)
+log = TalkRecord('/var/lib/asterisk/agi-bin/'+asterisk.abntnum)
 
 #Читаем .trgs файл
 sp_bl = SpeechBlock(block=asterisk.speech_block,\
                     scheme=asterisk.scheme,\
-                    path='/Users/RyabovSergey/Projects/robotron/')
+                    path='/var/lib/asterisk/sounds/')
 
 sk = SpeechKit()
 
