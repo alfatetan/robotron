@@ -7,7 +7,7 @@ from speechblock import SpeechBlock
 
 #Basic code
 asterisk = Asterisk()
-log = AgiDebug('/var/lib/asterisk/agi-bin/preparation_debug.log')
+log = AgiDebug('/var/lib/asterisk/agi-bin/preparation.log')
 
 #Переназначаем переменные из .call файла
 #Если их нет, тогда ставим значение по умолчанию
