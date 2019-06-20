@@ -36,7 +36,11 @@ class SpeechKit(object):
             full_token = json.load(file)
         return full_token['iamToken']
 
-    def recognize(self, filename):
+    def recognize(self, filename, \
+                  path='/var/spool/asterisk/monitor/'):
+
+        filename = path + filename
+        
         try:
             with open(filename, 'rb') as file:
                 data = file.read()
