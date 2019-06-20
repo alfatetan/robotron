@@ -23,12 +23,15 @@ class SpeechKit(object):
         self.result = ''
 
     @staticmethod
-    def get_token(filename='iam.token'):
+    def get_token(filename='iam.token', \
+                  path='/var/lib/asterisk/agi-bin/'):
         """
         Загружаем IAM токен для распознавания звукового файла, по умолчанию
         это файл iam.token
         :return: False, если не будет iam.token
         """
+        filename = path + filename
+        
         with open(filename, 'r') as file:
             full_token = json.load(file)
         return full_token['iamToken']
