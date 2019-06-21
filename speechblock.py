@@ -59,7 +59,9 @@ class SpeechBlock(object):
         wt_max = 0
         best_block = ''
         default_block = ''
-        print(self.triggers)
+        
+        #print(self.triggers) #отладочная строка
+        
         #Чтобы определить следующий блок, перебираем триггеры
         for block, trigger in self.triggers.items():
             wt = 0
