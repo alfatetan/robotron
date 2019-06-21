@@ -1,0 +1,7 @@
+7_1.wav: Block 7. Voice 1
+7_3.wav: Block 7. Voice 3
+7_2.wav: Block 7. Voice 2
+$
+back(2): 1 one один раз первый
+back(1): 6 six шесть шестой
+08: _
