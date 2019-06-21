@@ -7,32 +7,24 @@ from speechblock import SpeechBlock
 
 #Basic code
 asterisk = Asterisk()
-log = AgiDebug('/var/lib/asterisk/agi-bin/preparation.log')
 
 #Переназначаем переменные из .call файла
 #Если их нет, тогда ставим значение по умолчанию
 start = asterisk.get_variable('startblock')
 scheme = asterisk.get_variable('schemetalk')
-#abntnum = asterisk.get_variable('abntnum')
 
 #Создаём лог файл разговора при любом раскладе
 talk = TalkRecord(asterisk.abntnum, asterisk.typering)
-log.upd("Создан файл .talk с именем: ", asterisk.abntnum)
-
-log.upd('Тип звонка: ', asterisk.typering)
 
 if asterisk.typering == 'out':
     #Подгружаем схему разговора
     scheme = asterisk.get_variable('schemetalk')
-    log.upd('schemetalk = ', scheme)
     
     #Устанавливаем схему разговора сразу в Астериск
     asterisk.scheme = scheme
-    log.upd('Параметр scheme в Asterisk устновлен')
     
     #Узнаём какой первый блок схемы разговора
     startblock = asterisk.get_variable('startblock')
-    log.upd('Первый блок схемы разговора: ', startblock)
 
     #Устанавливаем первый блок разговора в Asterisk
     asterisk.speech_block = startblock
@@ -40,11 +32,12 @@ if asterisk.typering == 'out':
     #Подгружаем этот блок разговора
     sb = SpeechBlock(block=startblock,scheme=scheme, \
                      path='/var/lib/asterisk/sounds')
-    log.upd('Блок речи подгружен')
     
     sb.get_audio()
     asterisk.sayfile = sb.next_audiofile
-    log.upd('sayfile будет: ', asterisk.sayfile)
+    
+    #Добавляем в протокол разговора запись первой реплики
+    talk.upd(sb.next_audiotext, startblock)
     
 if asterisk.typering == 'in':
     #Тут будет обработчик, который будет подгружать разные схемы
