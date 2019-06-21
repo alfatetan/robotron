@@ -28,7 +28,8 @@ if not asterisk.skip:
     #Распознаём файл речи и получаем результат
     #sk.recognize(asterisk.voicefile)
     #Используем тестовый класс:
-    sk.recognize()
+    voicefile = asterisk.voicefile + '-in.wav'
+    sk.recognize(voicefile)
     log.save_talk(sk.result)
 
 #Определяем следующий блок
@@ -44,7 +45,7 @@ if next_block_name.count('back='):
 #Читаем содержимое следующего блока и устанавливаем SKIP
 sp_bl_next = SpeechBlock(block=next_block_name,\
                          scheme=asterisk.scheme,\
-                         path='/Users/RyabovSergey/Projects/robotron/')
+                         path='/var/lib/asterisk/sounds/')
 
 #Вычисляем следующий аудиофайл для воспроизведения
 value = log.history.count(next_block_name)
