@@ -5,16 +5,14 @@ class Synthesis(object):
     """
     Класс синтезирования голоса с помощью Yandex SpeechKit
     """
-    def __init__(self, folder_id='b1gfll967nmtrqvfc2v5',  lang='ru-RU', \
-                 type_voice = 'female', 
-    ):
+    def __init__(self, folder_id='b1gfll967nmtrqvfc2v5',  lang='ru-RU' ):
         """
         Инициируем класс с первоначальными данными для синтеза
         param:
         return:
         """
         self.folder_id =  folder_id
-        self.iam_token = self.get_token(path='/Users/RyabovSergey/Projects/robotron/')
+        self.iam_token = self.get_token(path='/var/lib/asterisk/agi-bin/')
 
         self.url = 'https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize'
         self.headers = {
@@ -65,22 +63,22 @@ class Synthesis(object):
 
         return
 
-    def say_evil(self, text, who='oksana'):
+    def say_evil(self, filename, text, who='oksana'):
         """
         Говорим со злой интонацией
         param:
         return:
         """
-        self.say(text, who, attitude='evil')
+        self.say(filename, text, who, attitude='evil')
         return
 
-    def say_good(self, text, who='oksana'):
+    def say_good(self, filename, text, who='oksana'):
         """
         Говорим со злой интонацией
         param:
         return:
         """
-        self.say(text, who, attitude='good')
+        self.say(filename, text, who, attitude='good')
         return
 
     def change_speed(self, persent):
