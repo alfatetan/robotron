@@ -23,7 +23,8 @@ class SpeechBlock(object):
             self.trgs_filename = block
         #Путь к схеме разговора
         path = path + '/' if path[-1] != '/' else path
-        scheme = scheme + '/' if scheme[-1] != '/' else scheme
+        if scheme:
+            scheme = scheme + '/' if scheme[-1] != '/' else scheme
         self.scheme_folder = path + scheme
         #Имя файла блока с полным путём разговра
         self.trgs_filename = self.scheme_folder + self.trgs_filename
