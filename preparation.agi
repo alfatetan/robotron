@@ -1,0 +1,47 @@
+#!/usr/bin/python3
+
+from asterisk import Asterisk
+from agidebug import AgiDebug
+from talkrecord import TalkRecord
+from speechblock import SpeechBlock
+
+#Basic code
+asterisk = Asterisk()
+
+#Переназначаем переменные из .call файла
+#Если их нет, тогда ставим значение по умолчанию
+start = asterisk.get_variable('startblock')
+scheme = asterisk.get_variable('schemetalk')
+
+#Создаём лог файл разговора при любом раскладе
+talk = TalkRecord(asterisk.abntnum, asterisk.typering)
+
+if asterisk.typering == 'out':
+    #Подгружаем схему разговора
+    scheme = asterisk.get_variable('schemetalk')
+    
+    #Устанавливаем схему разговора сразу в Астериск
+    asterisk.scheme = scheme
+    
+    #Узнаём какой первый блок схемы разговора
+    startblock = asterisk.get_variable('startblock')
+
+    #Устанавливаем первый блок разговора в Asterisk
+    asterisk.speech_block = startblock
+    
+    #Подгружаем этот блок разговора
+    sb = SpeechBlock(block=startblock,scheme=scheme, \
+                     path='/var/lib/asterisk/sounds')
+    
+    sb.get_audio()
+    asterisk.sayfile = sb.next_audiofile
+    
+    #Добавляем в протокол разговора запись первой реплики
+    talk.upd(sb.next_audiotext, startblock)
+    
+if asterisk.typering == 'in':
+    #Тут будет обработчик, который будет подгружать разные схемы
+    #в зависимости от номера телефона, согласно таблицы
+    #Пока просто заглушка
+    pass
+

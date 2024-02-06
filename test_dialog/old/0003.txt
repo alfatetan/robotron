@@ -1,0 +1,9 @@
+0001_1.wav:Sentence one for first wav file
+0001_2.wav:Sentence two for second wav file
+0001_3.wav:Sentence three for third wav file
+$
+0002:_
+0010:what is "the base"(3)
+0001:i didn't "did not" understand you
+0011:who gave you my number
+1000:fuck you no excuseme sorry

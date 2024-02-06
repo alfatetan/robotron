@@ -1,0 +1,60 @@
+01.txt
++++
+1_1.wav: Block 1. Voice 1
+1_2.wav: Block 1. Voice 2
+1_3.wav: Block 1. Voice 3
+$
+02: 2 two два второй
+04: 4 four четыре четвёртый четвертый
+06: 6 six шесть шестой
+%%%
+02.txt
++++
+2_1.wav: Block 2. Voice 1
+$
+03:_
+%%%
+03.txt
++++
+3_1.wav: Block 3. Voice 1
+$
+08: _
+%%%
+08.txt
++++
+_end: The end voice
+$
+08:_
+%%%
+04.txt
++++
+4_1.wav: Block 4. Voice 1
+$
+05:*
+%%%
+05.txt
++++
+5_1.wav: Block 5. Voice 1
+$
+08:_
+%%%
+06.txt
++++
+6_1.wav: Block 6. Voice 1
+6_2.wav: Block 6. Voice 2
+6_3.wav: Block 6. Voice 3
+6_5.wav: Block 6. Voice 5
+6_4.wav: Block 6. Voice 4
+$
+back(1): 1 one один раз первый
+07: 7 seven семь седьмой
+%%%
+07.txt
++++
+7_1.wav: Block 7. Voice 1
+7_3.wav: Block 7. Voice 3
+7_2.wav: Block 7. Voice 2
+$
+back(2): 1 one один раз первый
+back(1): 6 six шесть шестой
+08: _

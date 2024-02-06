@@ -1,2 +1,11 @@
 /venv/
 /.idea/
+/__pycache__/
+/trash/
+/old/
+/sounds/
+iam.token
+*.call
+*.bak
+*~
+\#*\#

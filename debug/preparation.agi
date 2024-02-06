@@ -1,0 +1,97 @@
+#!/usr/bin/python3
+
+from agidebug import AgiDebug
+#from asterisk import Asterisk
+import sys
+
+class Asterisk(AgiDebug):
+    """
+    Класс для работы с Asterisk. Инкапсулирует в себе функции
+    работы и все необходимые переменные
+    """
+    def __init__(self):
+        #Пропускаем первые данные, которые нам не нужны
+        super().__init__('/var/lib/asterisk/agi-bin/asterisk_log.txt')
+        self.upd('Пропускаем первые данные')
+        self.first_data_ignore()
+        
+
+        #Подгружаем переменные с Asterisk
+        self.scheme = self.get_variable('scheme')
+        self.upd('scheme = ', self.scheme)
+        self.speech_block = self.get_variable('sayindex')
+        self.upd('speech_block (sayindex) = ', self.speech_block)
+        self.skip = self.get_variable('skip')
+        self.upd('skip = ', self.skip)
+        self.voicefile = self.get_variable('voicefile')
+        self.upd('voicefile = ', self.voicefile)
+        self.waitvoice = self.get_variable('waitvoice')
+        self.upd('waitvoice = ', self.waitvoice)
+        self.abntnum = self.get_variable('abntnum')
+        self.upd('abntnum = ', self.abntnum)
+        self.sayfile = ''
+        self.upd('sayfile = ', self.sayfile)
+        
+        return
+
+    def __del__(self):
+        """
+        Диструктор объекта. В завершении мы выгружаем все имеющиеся
+        данные в Asterisk
+        """
+        self.set_variable('scheme', self.scheme)
+        self.set_variable('sayindex', self.speech_block)
+        self.set_variable('skip', self.skip)
+        self.set_variable('waitvoice', self.waitvoice)
+        self.set_variable('sayfile', self.sayfile)
+
+        return
+    
+    def first_data_ignore(self):
+        """
+        Пропускаем все начальные данные пришедшие от Asterisk
+        """
+        for _ in range(21):
+            line = sys.stdin.readline()
+            
+        return
+
+    def get_variable(self, variable):
+        """
+        Получаем значение переменной из Asterisk
+        """
+        send_string = 'get variable ' + variable + '\n'
+        sys.stdout.write(send_string)
+        sys.stdout.flush()
+        read_line = sys.stdin.readline()
+        read_line = read_line.strip()
+        
+        return read_line[14:-1]
+
+    def set_variable(self, name_variable, variable):
+        """
+        Устанавливаем значение переменной в Asterisk
+        """
+        send_string = 'set variable '
+        send_string += str(name_variable)
+        send_string += ' '
+        send_string += str(variable)
+        send_string += '\n'
+        sys.stdout.write(send_string)
+        sys.stdout.flush()
+        read_line = sys.stdin.readline()
+        
+        return read_line
+
+log = AgiDebug('/var/lib/asterisk/agi-bin/protocol_preparation.txt')
+log.upd('Проверка класса Asterisk')
+
+ast = Asteisk()
+log.upd('Создан класс Asterisk как ast')
+log.upd('scheme = ', ast.scheme)
+log.upd('speech_block = ', ast.speech_block)
+log.upd('voicefile = ', ast.voicefile)
+log.upd('waitvoice = ', ast.waitvoice)
+log.upd('abntnum =', ast.abntnum)
+callerid = ast.get_variable('agi_callerid')
+log.upd('agi_callerid = ', callerid)

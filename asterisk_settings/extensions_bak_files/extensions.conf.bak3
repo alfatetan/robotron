@@ -1,0 +1,65 @@
+[zadarma-in]
+exten => 590889, 1, Dial(SIP/basic)
+
+[zadarma-in2]
+;exten => 590889, 1, Dial(SIP/101)                       ; все входящие звонки с транка 590889 направлены на внутренний номер 101
+;exten => 590889, 1, Dial(SIP/sipzoiper)
+;exten => 590889, 1, Answer()
+;exten => 590889, n, Monitor(wav, /tmp/robobaba/monitor_test, o)
+
+;exten => 590889, 1, Record(/tmp/robobaba/voice_test.wav,2,15,qs)
+;exten => 590889, n, Answer()
+;exten => 590889, n, SendDTMF(12345)
+;exten => 590889, n, WaitForNoise(500, 5, 120)
+;exten => 590889, n, SendDTMF(11223332112233)
+;exten => 590889, n, WaitForSilence(500, 5, 120)
+;exten => 590889, n, SendDTMF(12345)
+
+;exten => 590889, n, StopMonitor()
+;exten => 590889, n, Playback(/tmp/robobaba/voice_test)
+
+;exten => 590889, 1, Set(fname=${STRFTIME(${EPOCH},,%Y%m%d%H%M)}-${CALLERID(number)}-${EXTEN})
+exten => 590889, 1, Set(fname=voicetest)
+;exten => 590889, n, MixMonitor(/tmp/robobaba/${fname}.wav)
+exten => 590889, n, Monitor(wav,/tmp/robobaba/${fname},o)
+exten => 590889, n, Answer()
+;exten => 590889, n, BackgroundDetect(ru/demo-instruct,150)
+exten => 590889, n, BackgroundDetect(my/my_hello, 150)
+exten => 590889, n, WaitForSilence(1500, 1, 0, 150)
+exten => 590889, n, StopMonitor()
+exten => 590889, n, SendDTMF(00000)
+
+exten => 590889, n, Playback(/tmp/robobaba/${fname}.wav)
+exten => 590889, n, Hangup()
+
+exten => talk, n, SendDTMF(998877789988777)
+
+[zadarma-out]
+exten => _XXX,1,Dial(SIP/${EXTEN})                     ; звонки на трехзначные внутренние номера aстериска
+exten => _XXX.,1,Dial(SIP/${EXTEN}@590889)             ; звонки на номера в которых четрые и более цифр через транк 590889
+
+[phones]
+
+[dialog]
+exten => zadarma-in, 1, Set(fname=voicetest,%d)
+exten => zadarma-in, n, NoOp(Назначили переменную ${fname})
+exten => zadarma-in, n, Answer()
+exten => zadarma-in, n, NoOp(Отвечаем на звонок)
+exten => zadarma-in, n, Monitor(wav, /tmp/robobaba/${fname}, o)
+exten => zadarma-in, n, NoOp(Включаем запись входящего канала, исключая исходящий)
+;exten => zadarma-in, n, Answer()
+exten => zadarma-in, n, NoOp(Произносим первый текст диалога)
+exten => zadarma-in, n, BackgroundDetect(my/name, 150)
+exten => zadarma-in, n, NoOp(Ждём пока абонент ответит)
+exten => zadarma-in, n, WaitForNoise(500, 1, 0)
+exten => zadarma-in, n, NoOp(Ждём пока абонент замолчит)
+exten => zadarma-in, n, WaitForSilence(1500, 1, 0, 150)
+exten => talk, 1, BackgroundDetect(my/aga)
+exten => talk, n, NoOp(Абонент перебивает)
+exten => zadarma-in, n, StopMonitor()
+exten => zadarma-in, n, NoOp(Останавливаем запись)
+exten => zadarma-in, n, Dial(SIP/recog)
+
+[recognize]
+exten => basic, 1, Answer()
+exten => basic, n, Dial(SIP/basic)
