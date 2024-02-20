@@ -29,4 +29,4 @@ Unfortunately, the file requirenments.txt was lost, and it is hard for me to rec
 #### Sample dialogue and logging video
 [![Sample dialogue and logging](https://github.com/alfatetan/robotron/assets/46200647/7bdc639d-cbc9-4657-ac20-983928b58a69)](https://www.youtube.com/watch?v=ib41Xp70UAo)
 
-
+Some of the project documentation can be found in the [notes folder](https://github.com/alfatetan/robotron/tree/master/notes)
