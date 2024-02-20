@@ -26,6 +26,7 @@ Unfortunately, the file requirenments.txt was lost, and it is hard for me to rec
 - To simulate natural communication, a function allowing to interrupt the interlocutor's speech was built in.
 - An algorithm for filtering profanity was also implemented.
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://youtu.be/ib41Xp70UAo)
+
+[![Sample dialogue and logging](https://github.com/alfatetan/robotron/assets/46200647/7bdc639d-cbc9-4657-ac20-983928b58a69)](https://youtu.be/ib41Xp70UAo)
 
 [](https://youtu.be/ib41Xp70UAo)
