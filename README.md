@@ -28,5 +28,3 @@ Unfortunately, the file requirenments.txt was lost, and it is hard for me to rec
 
 
 [![Sample dialogue and logging](https://github.com/alfatetan/robotron/assets/46200647/7bdc639d-cbc9-4657-ac20-983928b58a69)](https://youtu.be/ib41Xp70UAo)
-
-[](https://youtu.be/ib41Xp70UAo)
