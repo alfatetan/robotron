@@ -24,3 +24,8 @@ Unfortunately, the file requirenments.txt was lost, and it is hard for me to rec
 - The client was called using a pre-prepared list.
 - Yandex Cloud Speech Recognition Service was used for speech recognition and synthesis.
 - To simulate natural communication, a function allowing to interrupt the interlocutor's speech was built in.
+- An algorithm for filtering profanity was also implemented.
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://youtu.be/ib41Xp70UAo)
+
+[](https://youtu.be/ib41Xp70UAo)
